@@ -9,8 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import sun.security.util.Length;
-
 public class BinaryConverterUtilizer implements ActionListener {
 	static BinaryConverter obj0 = new BinaryConverter();
 	static JFrame frame = new JFrame();
@@ -58,31 +56,42 @@ public class BinaryConverterUtilizer implements ActionListener {
 	}
 	
 	public String binaryToHexidecimal(String input) {
-		String decimal = binaryToDecimal(input);
-		if (decimal.equals("")) {
+		String Hexidecimal = "";
+		int decimal = Integer.parseInt(binaryToDecimal(input));
+		if (decimal == 0) {
 			return "";
 		} else {
-			while (Integer.parseInt(While(input)) >= 16) {
-				
+			while (decimal != 0) {
+				if (decimal % 16 < 10) {
+					Hexidecimal += decimal % 16;
+				} else if (decimal % 16 == 10) {
+					Hexidecimal += "a";
+				} else if (decimal % 16 == 11) {
+					Hexidecimal += "b";
+				} else if (decimal % 16 == 12) {
+					Hexidecimal += "c";
+				} else if (decimal % 16 == 13) {
+					Hexidecimal += "d";
+				} else if (decimal % 16 == 14) {
+					Hexidecimal += "e";
+				} else if (decimal % 16 == 15) {
+					Hexidecimal += "f";
+				}
+				decimal = (decimal - (decimal % 16)) / 16;
 			}
-			
 		}
-		return input;
-	}
-	
-	public String While(String input) {
-		int count = 0;
-		while (Integer.parseInt(input) >= 16) {
-			input = String.valueOf(Integer.parseInt(input) - 16);
-			count += 1;
+		String hexidecimalCopy = Hexidecimal;
+		Hexidecimal = "";
+		for (int i = hexidecimalCopy.length() - 1; i >= 0; i--) {
+			Hexidecimal += String.valueOf(hexidecimalCopy.charAt(i));
 		}
-		return input;
+		return Hexidecimal;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		label.setText(obj0.convert(answer.getText()) + " " + binaryToDecimal(answer.getText()));
+		label.setText(obj0.convert(answer.getText()) + " | " + binaryToDecimal(answer.getText()) + " | " + binaryToHexidecimal(answer.getText()));
 		frame.pack();
 		
 	}
