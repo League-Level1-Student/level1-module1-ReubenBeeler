@@ -35,6 +35,7 @@ public class BinaryConverterUtilizer implements ActionListener {
 		
 		frame.pack();
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public String binaryToDecimal(String input) {
@@ -65,23 +66,23 @@ public class BinaryConverterUtilizer implements ActionListener {
 				if (decimal % 16 < 10) {
 					Hexidecimal += decimal % 16;
 				} else if (decimal % 16 == 10) {
-					Hexidecimal += "a";
+					Hexidecimal += "A";
 				} else if (decimal % 16 == 11) {
-					Hexidecimal += "b";
+					Hexidecimal += "B";
 				} else if (decimal % 16 == 12) {
-					Hexidecimal += "c";
+					Hexidecimal += "C";
 				} else if (decimal % 16 == 13) {
-					Hexidecimal += "d";
+					Hexidecimal += "D";
 				} else if (decimal % 16 == 14) {
-					Hexidecimal += "e";
+					Hexidecimal += "E";
 				} else if (decimal % 16 == 15) {
-					Hexidecimal += "f";
+					Hexidecimal += "F";
 				}
 				decimal = (decimal - (decimal % 16)) / 16;
 			}
 		}
 		String hexidecimalCopy = Hexidecimal;
-		Hexidecimal = "";
+		Hexidecimal = "0x";
 		for (int i = hexidecimalCopy.length() - 1; i >= 0; i--) {
 			Hexidecimal += String.valueOf(hexidecimalCopy.charAt(i));
 		}
